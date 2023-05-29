@@ -2,10 +2,14 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import MajorTermForm from "@/components/MajorTermForm";
 import Link from "next/link";
+import { globalStyles } from "./styles";
+import { Header } from "@/components/general/Header";
 
 export default function Home() {
   const [major, setMajor] = useState("");
   const [term, setTerm] = useState("");
+
+  globalStyles();
 
   const router = useRouter();
 
@@ -21,6 +25,7 @@ export default function Home() {
 
   return (
     <>
+      <Header />
       <main>
         <div>
           <p>Major: {major}</p>
