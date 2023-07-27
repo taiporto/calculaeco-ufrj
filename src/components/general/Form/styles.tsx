@@ -1,6 +1,6 @@
 import * as RadixSelect from "@radix-ui/react-select";
 import * as RadixForm from "@radix-ui/react-form";
-import { styled } from "../../../stitches.config";
+import { styled } from "../../../../stitches.config";
 
 export const FormRoot = styled(RadixForm.Root, {
   display: "flex",

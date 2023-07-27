@@ -1,28 +1,18 @@
 "use client";
 
 import { Major } from "@/api/types";
-import React, { Ref, useRef, useState } from "react";
-import { Button } from "../general/Button/styles";
-import {
-  FormField,
-  FormRoot,
-  SelectContent,
-  SelectIcon,
-  SelectTrigger,
-  SelectViewport,
-  StyledSelectItem,
-} from "./styles";
+import React, { useCallback, useMemo, useState } from "react";
 
-import * as Form from "@radix-ui/react-form";
+import { Form } from "../general/Form";
+import { Field } from "../general/Form/types";
+import { SelectItem } from "../general/Form/Select/SelectItem";
 
-import * as Select from "@radix-ui/react-select";
-import {
-  CheckIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "@radix-ui/react-icons";
+type TermField = {
+  term: number;
+  disabled: boolean;
+};
 
-type MajorTermFormType = {
+type MajorTermFormProps = {
   majorsData: Major[];
   setMajor: (value: string) => void;
   setTerm: (value: string) => void;
@@ -30,27 +20,13 @@ type MajorTermFormType = {
   handleSubmitForm: (event: React.FormEvent<HTMLFormElement>) => void;
 };
 
-const SelectItem = React.forwardRef(function SelectItem(
-  { children, ...props }: React.PropsWithChildren<Select.SelectItemProps>,
-  forwardedRef: Ref<HTMLDivElement>
-) {
-  return (
-    <StyledSelectItem {...props} ref={forwardedRef}>
-      <Select.ItemText>{children}</Select.ItemText>
-      <Select.ItemIndicator>
-        <CheckIcon />
-      </Select.ItemIndicator>
-    </StyledSelectItem>
-  );
-});
-
 const MajorTermForm = ({
   majorsData,
   setMajor,
   setTerm,
   submitButtonValue,
   handleSubmitForm,
-}: MajorTermFormType) => {
+}: MajorTermFormProps) => {
   const [terms, setTerms] = useState([
     {
       term: 1,
@@ -86,8 +62,6 @@ const MajorTermForm = ({
     },
   ]);
 
-  const formRef = useRef<HTMLFormElement>(null);
-
   const resetSelectability = () => {
     setTerms((prevTerms) =>
       prevTerms.map((item) => {
@@ -97,130 +71,78 @@ const MajorTermForm = ({
     );
   };
 
-  const handleMajorChange = (value: string) => {
-    resetSelectability();
+  const handleMajorChange = useCallback(
+    (value: string) => {
+      resetSelectability();
 
-    setMajor(value);
+      setMajor(value);
 
-    if (["jcs", "pp", "pe", "rtv"].includes(value)) {
-      setTerms((prevTerms) =>
-        prevTerms.map((item) => {
-          if (item.term <= 3) item.disabled = true;
-          return item;
-        })
-      );
-    }
-
-    if (value === "cs") {
-      setTerms((prevTerms) =>
-        prevTerms.map((item) => {
-          if (item.term > 3) item.disabled = true;
-          return item;
-        })
-      );
-    }
-  };
-
-  const handleTermChange = (value: string) => {
-    setTerm(value);
-  };
-
-  const handleButtonClick = () => {
-    if (formRef.current) {
-      const inputs = formRef.current.querySelectorAll("select");
-      if (Array.from(inputs).some((input) => input.value == "default")) {
-        console.log("Preencha todos os campos!");
+      if (["jcs", "pp", "pe", "rtv"].includes(value)) {
+        setTerms((prevTerms) =>
+          prevTerms.map((item) => {
+            if (item.term <= 3) item.disabled = true;
+            return item;
+          })
+        );
       }
-    }
-  };
+
+      if (value === "cs") {
+        setTerms((prevTerms) =>
+          prevTerms.map((item) => {
+            if (item.term > 3) item.disabled = true;
+            return item;
+          })
+        );
+      }
+    },
+    [setMajor]
+  );
+
+  const handleTermChange = useCallback(
+    (value: string) => {
+      setTerm(value);
+    },
+    [setTerm]
+  );
+
+  const fields: Field<Major | TermField>[] = useMemo(
+    () => [
+      {
+        type: "select",
+        name: "major",
+        label: "Qual é seu curso?",
+        onValueChange: handleMajorChange,
+        placeholder: "-- Selecione seu curso --",
+        selectData: majorsData,
+      },
+      {
+        type: "select",
+        name: "term",
+        label: "E qual é o seu período?",
+        onValueChange: handleTermChange,
+        placeholder: "-- Selecione seu período --",
+        selectData: terms,
+        renderSelectItem: ({ term, disabled }: TermField) => (
+          <SelectItem
+            disabled={disabled}
+            id={`${term}_periodo`}
+            key={`${term}_periodo`}
+            value={"" + term}
+          >
+            {term}º período
+          </SelectItem>
+        ),
+      },
+    ],
+    [handleMajorChange, handleTermChange, majorsData, terms]
+  );
 
   return (
-    majorsData && (
-      <FormRoot onSubmit={handleSubmitForm} ref={formRef}>
-        <div>
-          <FormField name="major">
-            <Form.Label id="major-label" htmlFor="major-select">
-              Qual é seu curso?
-            </Form.Label>
-            <Form.Control asChild>
-              <Select.Root onValueChange={handleMajorChange}>
-                <SelectTrigger aria-labelledby="major-label">
-                  <Select.Value placeholder="-- Selecione o curso --" />
-                  <SelectIcon>
-                    <ChevronDownIcon />
-                  </SelectIcon>
-                </SelectTrigger>
-                <Select.Portal>
-                  <SelectContent position="popper" align="center">
-                    <Select.ScrollUpButton>
-                      <ChevronUpIcon />
-                    </Select.ScrollUpButton>
-                    <SelectViewport>
-                      <Select.Group>
-                        {majorsData.map((major: Major) => (
-                          <SelectItem
-                            key={major.id}
-                            id={major.id}
-                            value={major.id}
-                          >
-                            {major.name}
-                          </SelectItem>
-                        ))}
-                      </Select.Group>
-                    </SelectViewport>
-                  </SelectContent>
-                </Select.Portal>
-              </Select.Root>
-            </Form.Control>
-          </FormField>
-        </div>
-        <div>
-          <FormField name="term">
-            <Form.Label id="term-label" htmlFor="term-select">
-              E em que período você está?
-            </Form.Label>
-            <Form.Control asChild>
-              <Select.Root onValueChange={handleTermChange}>
-                <SelectTrigger aria-labelledby="term-label">
-                  <Select.Value placeholder="-- Selecione o período --" />
-                  <SelectIcon>
-                    <ChevronDownIcon />
-                  </SelectIcon>
-                </SelectTrigger>
-                <Select.Portal>
-                  <SelectContent position="popper" align="center">
-                    <Select.ScrollUpButton>
-                      <ChevronUpIcon />
-                    </Select.ScrollUpButton>
-                    <SelectViewport>
-                      <Select.Group>
-                        {terms.map(({ term, disabled }) => {
-                          return (
-                            <SelectItem
-                              disabled={disabled}
-                              id={`${term}_periodo`}
-                              key={`${term}_periodo`}
-                              value={"" + term}
-                            >
-                              {term}º período
-                            </SelectItem>
-                          );
-                        })}
-                      </Select.Group>
-                    </SelectViewport>
-                  </SelectContent>
-                </Select.Portal>
-              </Select.Root>
-            </Form.Control>
-          </FormField>
-        </div>
-        <Form.Submit asChild>
-          <Button onClick={handleButtonClick} type="submit">
-            {submitButtonValue}
-          </Button>
-        </Form.Submit>
-      </FormRoot>
-    )
+    <Form
+      fields={fields}
+      submitText={submitButtonValue}
+      onSubmit={handleSubmitForm}
+    />
   );
 };
 
