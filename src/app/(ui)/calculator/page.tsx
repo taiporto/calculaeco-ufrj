@@ -8,7 +8,7 @@ type PageProps = {
 export default async function Page({ searchParams }: PageProps) {
   const { term, major } = searchParams;
 
-  if (!term || !major) return <div>No data</div>;
+  if (!term || !major) return <Calculator fetchedSubjects={[]} />;
 
   const fetchedSubjects = await fetchSubjectsByTermAndMajor(term, major);
 

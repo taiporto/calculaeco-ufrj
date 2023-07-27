@@ -3,7 +3,7 @@
 import * as Popover from "@radix-ui/react-popover";
 import { Subject } from "@/api/types";
 import MajorTermForm from "@/components/MajorTermForm";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useMajorsContext } from "@/app/context/majors";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import {
@@ -32,9 +32,7 @@ const AddSubjectPopover = ({ handleAddSubject }: AddSubjectPopoverProps) => {
     handleAddSubject(subject);
   };
 
-  const handleSubmitPreForm = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
+  const handleSubmitPreForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const fetchedSubjects = await fetchSubjectsByTermAndMajor(term, major);
@@ -45,11 +43,11 @@ const AddSubjectPopover = ({ handleAddSubject }: AddSubjectPopoverProps) => {
     setIsSelectSubjectOpen(true);
   };
 
-  const handleNewSubjectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setNewSubjectId(e.target.value);
+  const handleNewSubjectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setNewSubjectId(event.target.value);
   };
 
-  const handleSubmitSubjectForm = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitSubjectForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!newSubjectId) return;
     addSubject();
@@ -69,6 +67,7 @@ const AddSubjectPopover = ({ handleAddSubject }: AddSubjectPopoverProps) => {
           {isSelectSubjectOpen && subjects && (
             <SubjectSelectionForm
               onSubmit={handleSubmitSubjectForm}
+              handleNewSubjectChange={handleNewSubjectChange}
               subjects={subjects}
             />
           )}

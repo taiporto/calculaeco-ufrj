@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEventHandler } from "react";
 import {
   FormField,
   FormRoot,
@@ -17,7 +17,7 @@ import { SelectItem } from "./Select/SelectItem";
 type FormProps = {
   fields: Field<any>[];
   submitText: string;
-  onSubmit: () => void;
+  onSubmit: FormEventHandler<HTMLFormElement>;
 };
 
 export const Form = ({ fields, submitText, onSubmit }: FormProps) => {

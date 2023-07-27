@@ -20,7 +20,6 @@ const Calculator = ({ fetchedSubjects }: Props) => {
   const [subjects, setSubjects] = useState(fetchedSubjects);
   const [grades, setGrades] = useState<GradeMap>(new Map());
   const [CR, setCR] = useState<number>(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (grades?.size) {
@@ -44,10 +43,6 @@ const Calculator = ({ fetchedSubjects }: Props) => {
       );
     });
     return;
-  };
-
-  const handleClickOnAddSubjects = () => {
-    setIsModalOpen(true);
   };
 
   const handleAddSubject = (newSubject: Subject) => {

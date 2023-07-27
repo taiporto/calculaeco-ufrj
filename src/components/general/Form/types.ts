@@ -6,7 +6,7 @@ export type Field<T> = {
   type: 'select' | 'text';
   name: string;
   label: string;
-  onValueChange?: (value: string) => void | ChangeEventHandler<HTMLInputElement>;
+  onValueChange?: (value: any) => void;
   placeholder?: string;
   selectData?: Array<T>;
   renderSelectItem?: (data: any) => JSX.Element;
