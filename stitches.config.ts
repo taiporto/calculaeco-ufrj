@@ -29,6 +29,7 @@ export const {
       neutral40: "#989898",
       neutral20: "#C6C6C7",
       neutral10: "#DEDEDE",
+      neutral5: "#E4E4E4",
       neutral0: "#FFFFFF",
     },
     fonts: {

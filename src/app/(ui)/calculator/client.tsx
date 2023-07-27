@@ -1,14 +1,16 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 
 import { Subject } from "@/api/types";
-import { fetchSubjectsByTermAndMajor } from "@/api/fetchSubjects";
-import { AddSubjectModal } from "@/components/modals/AddSubjectModal";
 import { GradeMap } from "./types";
 import { calculateCR } from "./utils/calculateCR";
 import { SubjectBlock } from "@/components/calculator/SubjectBlock";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+import { AddSubjectPopover } from "@/components/modals/AddSubjectPopover";
+
+import * as Popover from "@radix-ui/react-popover";
 
 type Props = {
   fetchedSubjects: Array<Subject>;
@@ -86,7 +88,7 @@ const Calculator = ({ fetchedSubjects }: Props) => {
   };
 
   return (
-    <>
+    <Popover.Root modal={true}>
       <header>
         <Link href="/">
           <ArrowLeftIcon />
@@ -117,31 +119,17 @@ const Calculator = ({ fetchedSubjects }: Props) => {
           })}
         </form>
         <div>
-          <button onClick={handleClickOnAddSubjects}>Adicionar matéria</button>
+          <Popover.Trigger>
+            <div>Adicionar matéria</div>
+          </Popover.Trigger>
           {fetchedSubjects.length >= 1 && (
             <button onClick={resetSubjects}>Resetar lista de matérias</button>
           )}
         </div>
       </main>
-      {isModalOpen &&
-        createPortal(
-          <AddSubjectModal handleAddSubject={handleAddSubject} />,
-          document.body
-        )}
-    </>
+      <AddSubjectPopover handleAddSubject={handleAddSubject} />
+    </Popover.Root>
   );
 };
-
-export async function getServerSideProps(context: any) {
-  const { term, major } = context?.query;
-
-  const fetchedSubjects = await fetchSubjectsByTermAndMajor(term, major);
-
-  return {
-    props: {
-      fetchedSubjects,
-    },
-  };
-}
 
 export default Calculator;
