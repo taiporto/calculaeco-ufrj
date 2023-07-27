@@ -6,6 +6,11 @@ import MajorTermForm from "@/components/MajorTermForm";
 import React, { ChangeEvent, useState } from "react";
 import { useMajorsContext } from "@/app/context/majors";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import {
+  fetchSubjectById,
+  fetchSubjectsByTermAndMajor,
+} from "./utils/fetchSubjects";
+import { SubjectSelectionForm } from "./SubjectSelectionForm";
 
 type AddSubjectPopoverProps = {
   handleAddSubject: (subjectData: Subject) => void;
@@ -21,15 +26,7 @@ const AddSubjectPopover = ({ handleAddSubject }: AddSubjectPopoverProps) => {
   const majors = useMajorsContext();
 
   const addSubject = async (): Promise<void> => {
-    const subject = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/subjects/${newSubjectId}`
-    )
-      .then((res: Response) => {
-        if (!res.ok) throw new Error(`Error ${res.status} - ${res.statusText}`);
-
-        return res.json();
-      })
-      .catch((e) => console.error(e));
+    const subject = await fetchSubjectById(newSubjectId);
 
     if (!subject) return;
     handleAddSubject(subject);
@@ -40,15 +37,9 @@ const AddSubjectPopover = ({ handleAddSubject }: AddSubjectPopoverProps) => {
   ) => {
     event.preventDefault();
 
-    const fetchedSubjects = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/subjects?term=${term}&major=${major}`
-    )
-      .then((res: Response) => {
-        if (!res.ok) throw new Error(`Error ${res.status} - ${res.statusText}`);
+    const fetchedSubjects = await fetchSubjectsByTermAndMajor(term, major);
 
-        return res.json();
-      })
-      .catch((e) => console.error(e));
+    if (!fetchedSubjects) return;
 
     setSubjects(fetchedSubjects);
     setIsSelectSubjectOpen(true);
@@ -76,26 +67,10 @@ const AddSubjectPopover = ({ handleAddSubject }: AddSubjectPopoverProps) => {
             handleSubmitForm={handleSubmitPreForm}
           />
           {isSelectSubjectOpen && subjects && (
-            <form onSubmit={handleSubmitSubjectForm}>
-              <select
-                name="new-subject"
-                onChange={handleNewSubjectChange}
-                defaultValue={"default"}
-              >
-                <option value="default" disabled>
-                  {" "}
-                  --Selecione a matéria--{" "}
-                </option>
-                {subjects.map((subject) => {
-                  return (
-                    <option key={subject.id} value={subject.id}>
-                      {subject.name}
-                    </option>
-                  );
-                })}
-              </select>
-              <input type="submit" value="Adicionar matéria" />
-            </form>
+            <SubjectSelectionForm
+              onSubmit={handleSubmitSubjectForm}
+              subjects={subjects}
+            />
           )}
         </div>
         <Popover.Close aria-label="Close">
