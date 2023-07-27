@@ -1,7 +1,7 @@
 "use client";
 
 import { Major } from "@/api/types";
-import React, { ChangeEvent, Ref, useRef } from "react";
+import React, { Ref, useRef, useState } from "react";
 import { Button } from "../general/Button/styles";
 import {
   FormField,
@@ -31,15 +31,11 @@ type MajorTermFormType = {
 };
 
 const SelectItem = React.forwardRef(function SelectItem(
-  {
-    children,
-    className,
-    ...props
-  }: React.PropsWithChildren<Select.SelectItemProps>,
+  { children, ...props }: React.PropsWithChildren<Select.SelectItemProps>,
   forwardedRef: Ref<HTMLDivElement>
 ) {
   return (
-    <StyledSelectItem className={className} {...props} ref={forwardedRef}>
+    <StyledSelectItem {...props} ref={forwardedRef}>
       <Select.ItemText>{children}</Select.ItemText>
       <Select.ItemIndicator>
         <CheckIcon />
@@ -55,13 +51,50 @@ const MajorTermForm = ({
   submitButtonValue,
   handleSubmitForm,
 }: MajorTermFormType) => {
-  const termRef = useRef<HTMLDivElement>(null);
+  const [terms, setTerms] = useState([
+    {
+      term: 1,
+      disabled: false,
+    },
+    {
+      term: 2,
+      disabled: false,
+    },
+    {
+      term: 3,
+      disabled: false,
+    },
+    {
+      term: 4,
+      disabled: false,
+    },
+    {
+      term: 5,
+      disabled: false,
+    },
+    {
+      term: 6,
+      disabled: false,
+    },
+    {
+      term: 7,
+      disabled: false,
+    },
+    {
+      term: 8,
+      disabled: false,
+    },
+  ]);
+
   const formRef = useRef<HTMLFormElement>(null);
 
   const resetSelectability = () => {
-    termRef.current
-      ?.querySelectorAll("option")
-      .forEach((option) => ((option as HTMLOptionElement).disabled = false));
+    setTerms((prevTerms) =>
+      prevTerms.map((item) => {
+        item.disabled = false;
+        return item;
+      })
+    );
   };
 
   const handleMajorChange = (value: string) => {
@@ -70,27 +103,21 @@ const MajorTermForm = ({
     setMajor(value);
 
     if (["jcs", "pp", "pe", "rtv"].includes(value)) {
-      const baseCurriculumOptions = termRef.current?.querySelectorAll(
-        "option.base_curriculum"
+      setTerms((prevTerms) =>
+        prevTerms.map((item) => {
+          if (item.term <= 3) item.disabled = true;
+          return item;
+        })
       );
-
-      if (baseCurriculumOptions) {
-        baseCurriculumOptions.forEach((option) => {
-          (option as HTMLOptionElement).disabled = true;
-        });
-      }
     }
 
     if (value === "cs") {
-      const specializationOptions = termRef.current?.querySelectorAll(
-        "option.specialization"
+      setTerms((prevTerms) =>
+        prevTerms.map((item) => {
+          if (item.term > 3) item.disabled = true;
+          return item;
+        })
       );
-
-      if (specializationOptions) {
-        specializationOptions.forEach((option) => {
-          (option as HTMLOptionElement).disabled = true;
-        });
-      }
     }
   };
 
@@ -147,7 +174,7 @@ const MajorTermForm = ({
             </Form.Control>
           </FormField>
         </div>
-        <div ref={termRef}>
+        <div>
           <FormField name="term">
             <Form.Label id="term-label" htmlFor="term-select">
               E em que período você está?
@@ -167,12 +194,10 @@ const MajorTermForm = ({
                     </Select.ScrollUpButton>
                     <SelectViewport>
                       <Select.Group>
-                        {[1, 2, 3, 4, 5, 6, 7, 8].map((term) => {
+                        {terms.map(({ term, disabled }) => {
                           return (
                             <SelectItem
-                              className={
-                                term <= 3 ? "base_curriculum" : "specialization"
-                              }
+                              disabled={disabled}
                               id={`${term}_periodo`}
                               key={`${term}_periodo`}
                               value={"" + term}
