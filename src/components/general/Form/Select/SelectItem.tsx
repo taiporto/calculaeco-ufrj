@@ -1,7 +1,7 @@
 import * as RadixSelect from "@radix-ui/react-select";
-import { StyledSelectItem } from "../styles";
 import React, { Ref } from "react";
 import { CheckIcon } from "@radix-ui/react-icons";
+import { StyledSelectItem } from "./styles";
 
 export const SelectItem = React.forwardRef(function SelectItem(
   { children, ...props }: React.PropsWithChildren<RadixSelect.SelectItemProps>,

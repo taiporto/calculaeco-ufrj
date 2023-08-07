@@ -13,19 +13,35 @@ import {
 import { SubjectSelectionForm } from "./SubjectSelectionForm";
 
 import * as S from "./styles";
+import { useSubjectsContext } from "@/app/(ui)/calculator/context/subjects";
 
 type AddSubjectPopoverProps = {
   handleAddSubject: (subjectData: Subject) => void;
 };
 
-const AddSubjectPopover = ({ handleAddSubject }: AddSubjectPopoverProps) => {
+const AddSubjectPopover = () => {
+  const majors = useMajorsContext();
+  const { subjects, setSubjects } = useSubjectsContext();
+
   const [major, setMajor] = useState("");
   const [term, setTerm] = useState("");
-  const [subjects, setSubjects] = useState<Subject[]>();
   const [isSelectSubjectOpen, setIsSelectSubjectOpen] = useState(false);
   const [newSubjectId, setNewSubjectId] = useState<string>("");
 
-  const majors = useMajorsContext();
+  const handleAddSubject = (newSubject: Subject) => {
+    if (
+      subjects?.some((includedSubject) => newSubject.id === includedSubject.id)
+    ) {
+      console.log("Matéria já adicionada!");
+      return;
+    }
+
+    setSubjects((prevSubjects) => {
+      if (!prevSubjects) return [newSubject];
+
+      return [...prevSubjects, newSubject];
+    });
+  };
 
   const addSubject = async (): Promise<void> => {
     const subject = await fetchSubjectById(newSubjectId);

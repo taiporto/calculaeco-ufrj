@@ -5,6 +5,8 @@ import { useDebouncedCallback } from "use-debounce";
 import { ReloadIcon, TrashIcon } from "@radix-ui/react-icons";
 import { TextInput } from "@/components/general/Form/TextInput";
 
+import * as S from "./styles";
+
 type SubjectBlockProps = {
   subject: Subject;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -33,7 +35,7 @@ const SubjectBlock = ({
   return (
     <div>
       <h3 id={`${subject.name}_label`}>{subject.name}</h3>
-      <div>
+      <S.InputContainer>
         <TextInput
           ref={inputRef}
           id={subject.id}
@@ -44,22 +46,24 @@ const SubjectBlock = ({
           min="0"
           step="0.1"
         />
-        <button
-          onClick={clearGrade}
-          value="Limpar nota"
-          aria-label="Limpar nota"
-        >
-          <ReloadIcon />
-        </button>
-      </div>
+        <S.Buttons>
+          <button
+            onClick={clearGrade}
+            value="Limpar nota"
+            aria-label="Limpar nota"
+          >
+            <ReloadIcon />
+          </button>
 
-      <button
-        onClick={() => onDeleteSubject(subject.id)}
-        value={"Deletar matéria"}
-        aria-label="Deletar matéria"
-      >
-        <TrashIcon />
-      </button>
+          <button
+            onClick={() => onDeleteSubject(subject.id)}
+            value={"Deletar matéria"}
+            aria-label="Deletar matéria"
+          >
+            <TrashIcon />
+          </button>
+        </S.Buttons>
+      </S.InputContainer>
     </div>
   );
 };

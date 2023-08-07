@@ -15,9 +15,9 @@ export const SelectTrigger = styled(RadixSelect.SelectTrigger, {
   gap: 5,
   backgroundColor: "white",
   color: "$neutral100",
-  boxShadow: `0 2px 10px $neutral100`,
-  "&:hover": { backgroundColor: "$neutral5", cursor: "pointer" },
-  "&:focus": { boxShadow: `0 0 0 2px $neutral100` },
+  boxShadow: "rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+  "&:hover": { backgroundColor: "$neutral2", cursor: "pointer" },
+  "&:focus": { boxShadow: "0 0 0 2px $orange80; 0 1px 2px 0px $orange80" },
   "&[data-placeholder]": { color: "$neutral100" },
 });
 

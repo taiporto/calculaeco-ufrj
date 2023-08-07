@@ -1,5 +1,3 @@
-import { ChangeEventHandler, ReactNode } from "react";
-
 export type SelectData = {id: string, name: string}
 
 export type Field<T> = {
@@ -10,4 +8,5 @@ export type Field<T> = {
   placeholder?: string;
   selectData?: Array<T>;
   renderSelectItem?: (data: any) => JSX.Element;
+  renderComponent?: () => JSX.Element;
 }

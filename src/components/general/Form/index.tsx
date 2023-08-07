@@ -1,23 +1,22 @@
 import React, { FormEventHandler } from "react";
-import {
-  FormField,
-  FormRoot,
-  SelectContent,
-  SelectIcon,
-  SelectTrigger,
-  SelectViewport,
-} from "./styles";
+import { FormField, FormRoot } from "./styles";
 import * as RadixForm from "@radix-ui/react-form";
 import * as RadixSelect from "@radix-ui/react-select";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
 import Button from "../Button";
 import { Field, SelectData } from "./types";
 import { SelectItem } from "./Select/SelectItem";
+import {
+  SelectContent,
+  SelectIcon,
+  SelectTrigger,
+  SelectViewport,
+} from "./Select/styles";
 
 type FormProps = {
   fields: Field<any>[];
-  submitText: string;
-  onSubmit: FormEventHandler<HTMLFormElement>;
+  submitText?: string;
+  onSubmit?: FormEventHandler<HTMLFormElement>;
 };
 
 export const Form = ({ fields, submitText, onSubmit }: FormProps) => {
@@ -62,6 +61,8 @@ export const Form = ({ fields, submitText, onSubmit }: FormProps) => {
                       </SelectContent>
                     </RadixSelect.Portal>
                   </RadixSelect.Root>
+                ) : field.renderComponent ? (
+                  field.renderComponent()
                 ) : (
                   <input
                     type="text"

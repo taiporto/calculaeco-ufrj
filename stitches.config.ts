@@ -30,6 +30,7 @@ export const {
       neutral20: "#C6C6C7",
       neutral10: "#DEDEDE",
       neutral5: "#E4E4E4",
+      neutral2: "#F3F3F3",
       neutral0: "#FFFFFF",
     },
     shadows: {

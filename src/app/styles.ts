@@ -12,9 +12,8 @@ export const globalStyles = globalCss({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-between',
     background:
-      "radial-gradient($orange15, $neutral0, $neutral0), $neutral0",
+      "$neutral0",
   },
   'div#__next': {
     width: '100%',
