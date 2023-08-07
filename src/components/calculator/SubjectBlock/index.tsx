@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
 import { ReloadIcon, TrashIcon } from "@radix-ui/react-icons";
+import { TextInput } from "@/components/general/Form/TextInput";
 
 type SubjectBlockProps = {
   subject: Subject;
@@ -32,9 +33,8 @@ const SubjectBlock = ({
   return (
     <div>
       <h3 id={`${subject.name}_label`}>{subject.name}</h3>
-
       <div>
-        <input
+        <TextInput
           ref={inputRef}
           id={subject.id}
           aria-labelledby={`${subject.name}_label`}

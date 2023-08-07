@@ -11,6 +11,7 @@ import Link from "next/link";
 import { AddSubjectPopover } from "@/components/modals/AddSubjectPopover";
 
 import * as Popover from "@radix-ui/react-popover";
+import { Form } from "@/components/general/Form";
 
 type Props = {
   fetchedSubjects: Array<Subject>;

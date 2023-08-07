@@ -12,6 +12,8 @@ import {
 } from "./utils/fetchSubjects";
 import { SubjectSelectionForm } from "./SubjectSelectionForm";
 
+import * as S from "./styles";
+
 type AddSubjectPopoverProps = {
   handleAddSubject: (subjectData: Subject) => void;
 };
@@ -55,7 +57,7 @@ const AddSubjectPopover = ({ handleAddSubject }: AddSubjectPopoverProps) => {
 
   return (
     <Popover.Portal>
-      <Popover.Content>
+      <S.PopoverContent>
         <div>
           <MajorTermForm
             majorsData={majors}
@@ -72,11 +74,11 @@ const AddSubjectPopover = ({ handleAddSubject }: AddSubjectPopoverProps) => {
             />
           )}
         </div>
-        <Popover.Close aria-label="Close">
+        <S.PopoverClose aria-label="Close">
           <Cross2Icon />
-        </Popover.Close>
-        <Popover.Arrow />
-      </Popover.Content>
+        </S.PopoverClose>
+        <S.PopoverArrow />
+      </S.PopoverContent>
     </Popover.Portal>
   );
 };

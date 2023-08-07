@@ -10,7 +10,9 @@ export const globalStyles = globalCss({
     height: '100dvh',
     fontSize: '16px',
     display: 'flex',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     background:
       "radial-gradient($orange15, $neutral0, $neutral0), $neutral0",
   },

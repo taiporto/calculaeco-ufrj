@@ -32,22 +32,19 @@ export default function HomePage() {
   };
 
   return (
-    <MajorsProvider value={majors}>
-      <Header />
-      <main>
-        <FormContainer>
-          <MajorTermForm
-            majorsData={majors}
-            setMajor={setMajor}
-            setTerm={setTerm}
-            handleSubmitForm={handleSubmitForm}
-            submitButtonValue={"Ir para a calculadora"}
-          />
-        </FormContainer>
-        <Link href="/calculator">
-          Prefiro escolher minhas próprias matérias 😅
-        </Link>
-      </main>
-    </MajorsProvider>
+    <>
+      <FormContainer>
+        <MajorTermForm
+          majorsData={majors}
+          setMajor={setMajor}
+          setTerm={setTerm}
+          handleSubmitForm={handleSubmitForm}
+          submitButtonValue={"Ir para a calculadora"}
+        />
+      </FormContainer>
+      <Link href="/calculator">
+        Prefiro escolher minhas próprias matérias 😅
+      </Link>
+    </>
   );
 }

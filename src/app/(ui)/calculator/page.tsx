@@ -1,5 +1,5 @@
 import { fetchSubjectsByTermAndMajor } from "@/api";
-import Calculator from "./client";
+import Calculator from "./Calculator.client";
 
 type PageProps = {
   searchParams: { [key: string]: string | undefined };
