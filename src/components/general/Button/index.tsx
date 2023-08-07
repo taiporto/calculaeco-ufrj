@@ -1,15 +1,29 @@
-import React, { PropsWithChildren } from "react";
+import React, { FormEvent, PropsWithChildren, ReactNode } from "react";
 
-import { Button as StyledButton } from "./styles";
+import * as S from "./styles";
 
 type ButtonProps = PropsWithChildren<
-  | React.HTMLProps<HTMLButtonElement>
-  | React.HTMLProps<HTMLInputElement>
-  | React.ComponentProps<typeof StyledButton>
+  React.ButtonHTMLAttributes<HTMLButtonElement> &
+    React.InputHTMLAttributes<HTMLInputElement>
 >;
 
-const Button = (props: ButtonProps) => {
-  return <StyledButton {...props}>{props.children}</StyledButton>;
+const Button = ({ children, ...props }: ButtonProps) => {
+  const handleOnClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent> &
+      React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    const button = event.currentTarget;
+
+    if (button) button.textContent = "Loading...";
+
+    props.onClick?.(event);
+  };
+
+  return (
+    <S.Button onClick={handleOnClick} {...props}>
+      {children}
+    </S.Button>
+  );
 };
 
 export default Button;

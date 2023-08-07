@@ -3,7 +3,7 @@
 import * as Popover from "@radix-ui/react-popover";
 import { Subject } from "@/api/types";
 import MajorTermForm from "@/components/MajorTermForm";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { useMajorsContext } from "@/app/context/majors";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import {
@@ -15,31 +15,31 @@ import { SubjectSelectionForm } from "./SubjectSelectionForm";
 import * as S from "./styles";
 import { useSubjectsContext } from "@/app/(ui)/calculator/context/subjects";
 
-type AddSubjectPopoverProps = {
-  handleAddSubject: (subjectData: Subject) => void;
-};
-
 const AddSubjectPopover = () => {
   const majors = useMajorsContext();
-  const { subjects, setSubjects } = useSubjectsContext();
+  const { subjects: calculatorSubjects, setSubjects: setCalculatorSubjects } =
+    useSubjectsContext();
 
   const [major, setMajor] = useState("");
   const [term, setTerm] = useState("");
+  const [subjects, setSubjects] = useState<Subject[]>([]);
   const [isSelectSubjectOpen, setIsSelectSubjectOpen] = useState(false);
   const [newSubjectId, setNewSubjectId] = useState<string>("");
 
   const handleAddSubject = (newSubject: Subject) => {
     if (
-      subjects?.some((includedSubject) => newSubject.id === includedSubject.id)
+      calculatorSubjects?.some(
+        (includedSubject) => newSubject.id === includedSubject.id
+      )
     ) {
       console.log("Matéria já adicionada!");
       return;
     }
 
-    setSubjects((prevSubjects) => {
-      if (!prevSubjects) return [newSubject];
+    setCalculatorSubjects((prevCalculatorSubjects) => {
+      if (!prevCalculatorSubjects) return [newSubject];
 
-      return [...prevSubjects, newSubject];
+      return [...prevCalculatorSubjects, newSubject];
     });
   };
 
@@ -61,8 +61,8 @@ const AddSubjectPopover = () => {
     setIsSelectSubjectOpen(true);
   };
 
-  const handleNewSubjectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setNewSubjectId(event.target.value);
+  const handleNewSubjectChange = (value: string) => {
+    setNewSubjectId(value);
   };
 
   const handleSubmitSubjectForm = (event: FormEvent<HTMLFormElement>) => {

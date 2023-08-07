@@ -6,7 +6,7 @@ import { Field } from "@/components/general/Form/types";
 type SubjectSelectionFormProps = {
   subjects: Subject[];
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  handleNewSubjectChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleNewSubjectChange: (value: string) => void;
 };
 
 export const SubjectSelectionForm = ({

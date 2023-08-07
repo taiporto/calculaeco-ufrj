@@ -2,11 +2,11 @@
 
 import React, { Suspense } from "react";
 import { Information } from "./Information.client";
-import Calculator from "./Calculator/Calculator.client";
+import { SubjectsForm } from "./SubjectsForm/SubjectsForm.client";
 import { Loading } from "@/components/general/Loading";
 
 import * as Popover from "@radix-ui/react-popover";
-import { AddSubjectPopover } from "@/components/modals/AddSubjectPopover";
+import { AddSubjectPopover } from "./AddSubjectPopover";
 import { useSubjectsContext } from "../context/subjects";
 
 export const Main = () => {
@@ -21,7 +21,7 @@ export const Main = () => {
       <main>
         <Information />
         <Suspense fallback={<Loading />}>
-          <Calculator />
+          <SubjectsForm />
         </Suspense>
         <div>
           <Popover.Trigger>

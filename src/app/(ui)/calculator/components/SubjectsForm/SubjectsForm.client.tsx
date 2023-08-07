@@ -8,7 +8,7 @@ import { SubjectBlock } from "../SubjectBlock";
 import { useSubjectsContext } from "../../context/subjects";
 import { useGradesContext } from "../../context/grades";
 
-const Calculator = () => {
+export const SubjectsForm = () => {
   const { subjects, setSubjects } = useSubjectsContext();
   const { setGrades } = useGradesContext();
 
@@ -64,5 +64,3 @@ const Calculator = () => {
     </form>
   );
 };
-
-export default Calculator;
