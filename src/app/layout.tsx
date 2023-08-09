@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import { MajorsProvider } from "./context/majors";
 import { fetchAllMajors } from "@/api";
-import { getCssText } from "../../stitches.config";
+import StyledComponentsRegistry from "@/lib/registry";
+
+import "../globals.css";
 
 export const metadata: Metadata = {
   title: "CalculaECO",
@@ -17,14 +19,11 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <head>
-        <style
-          id="stitches"
-          dangerouslySetInnerHTML={{ __html: getCssText() }}
-        />
-      </head>
+      <head></head>
       <body>
-        <MajorsProvider value={majors}>{children}</MajorsProvider>
+        <StyledComponentsRegistry>
+          <MajorsProvider value={majors}>{children}</MajorsProvider>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

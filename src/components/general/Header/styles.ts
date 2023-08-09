@@ -1,7 +1,7 @@
-import { styled } from "../../../../stitches.config";
+import { styled } from "@xstyled/styled-components";
 
-export const Title = styled('h1', {
-  fontWeight: '600',
-  fontSize: '2.5rem',
-  textAlign: 'center',
-})
+export const Title = styled.h1Box`
+  font-weight: 600;
+  font-size: 2.5rem;
+  text-align: center;
+`;

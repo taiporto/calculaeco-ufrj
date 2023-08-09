@@ -1,17 +1,17 @@
-import { styled } from "../../../../stitches.config";
+import { styled } from "@xstyled/styled-components";
 
-export const Button = styled("button", {
-  width: "100%",
-  fontSize: "1rem",
-  padding: "16px",
-  borderRadius: "10px",
-  color: "$neutral0",
-  backgroundColor: "$neutral100",
-  border: "none",
-  transition: "all .2s",
+export const Button = styled.buttonBox`
+  width: 100%;
+  font-size: 1rem;
+  padding: 16px;
+  border-radius: 10px;
+  color: neutral0;
+  background-color: neutral100;
+  border: none;
+  transition: all 0.2s;
 
-  "&:hover": {
-    backgroundColor: "$neutral80",
-    cursor: "pointer",
-  },
-});
+  &:hover {
+    background-color: neutral80;
+    cursor: pointer;
+  }
+`;

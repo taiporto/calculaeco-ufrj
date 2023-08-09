@@ -1,11 +1,11 @@
-import { styled } from "../../../../../../stitches.config"
+import { styled } from "@xstyled/styled-components";
 
-export const InputContainer = styled('div', {
-  display: 'flex',
-  gap: 12,
-})
+export const InputContainer = styled.divBox`
+  display: flex;
+  gap: 12px;
+`
 
-export const Buttons = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-})
+export const Buttons = styled.divBox`
+  display: flex;
+  flex-direction: column;
+`;

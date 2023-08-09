@@ -1,22 +1,19 @@
 "use client";
 
 import { Header } from "@/components/general/Header";
-import { globalStyles } from "../styles";
-import { MajorsProvider, useMajorsContext } from "../context/majors";
+import { theme } from "../../xstyled.config";
 
-export default function ClientLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const majors = useMajorsContext();
-  globalStyles();
+import { x, ThemeProvider, Preflight } from "@xstyled/styled-components";
 
+export default function ClientLayout({ children }: { children: React.ReactNode }) {
   return (
-    <MajorsProvider value={majors}>
+    <ThemeProvider theme={theme}>
+      <Preflight />
       <Header />
-      <main>{children}</main>
+      <x.main display="flex" flexDirection="column" alignItems="center">
+        {children}
+      </x.main>
       <footer>Copywright</footer>
-    </MajorsProvider>
+    </ThemeProvider>
   );
 }

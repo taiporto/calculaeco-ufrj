@@ -8,6 +8,7 @@ import { Loading } from "@/components/general/Loading";
 import * as Popover from "@radix-ui/react-popover";
 import { AddSubjectPopover } from "./AddSubjectPopover";
 import { useSubjectsContext } from "../context/subjects";
+import Button from "@/components/general/Button";
 
 export const Main = () => {
   const { originalSubjects, setSubjects } = useSubjectsContext();
@@ -24,11 +25,11 @@ export const Main = () => {
           <SubjectsForm />
         </Suspense>
         <div>
-          <Popover.Trigger>
-            <div>Adicionar matéria</div>
+          <Popover.Trigger asChild>
+            <Button>Adicionar matéria</Button>
           </Popover.Trigger>
           {setSubjects.length >= 1 && (
-            <button onClick={resetSubjects}>Resetar lista de matérias</button>
+            <Button onClick={resetSubjects}>Resetar lista de matérias</Button>
           )}
         </div>
       </main>

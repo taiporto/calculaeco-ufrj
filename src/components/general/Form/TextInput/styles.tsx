@@ -1,41 +1,43 @@
-import { styled } from "../../../../../stitches.config";
+import { th, styled } from "@xstyled/styled-components";
 
-export const Fieldset = styled("fieldset", {
-  all: "unset",
-  display: "flex",
-  gap: 20,
-  alignItems: "center",
-});
+export const Fieldset = styled.fieldsetBox`
+  all: unset;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+`;
 
-export const Label = styled("label", {
-  fontSize: 13,
-  color: "$orange80",
-  width: 75,
-});
+export const Label = styled.labelBox`
+  font-size: 13px;
+  color: orange80;
+  width: 75px;
+`;
 
-export const Input = styled("input", {
-  all: "unset",
-  width: "100%",
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  flex: "1",
-  borderRadius: 8,
-  padding: "0 10px",
-  fontSize: 16,
-  lineHeight: 1,
-  color: "$neutral100",
-  boxShadow: `0 0 0 1px ${"$neutral20"}`,
-  background: "$neutral0",
-  height: 36,
+export const Input = styled.inputBox`
+  all: unset;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  border-radius: 8px;
+  padding: 0 10px;
+  font-size: 16px;
+  line-height: 1;
+  color: neutral100;
+  box-shadow: ${`0 0 0 1px ${th.color("neutral20")}`};
+  background-color: neutral0;
+  height: 36px;
 
-  "&:focus": { boxShadow: `0 0 0 2px ${"$orange50"}` },
-});
+  &:focus {
+    box-shadow: ${`0 0 0 2px ${th.color("orange50")}`};
+  }
+`;
 
-export const Text = styled("p", {
-  margin: 0,
-  color: "$orange30",
-  fontSize: 15,
-  lineHeight: "19px",
-  fontWeight: 500,
-});
+export const Text = styled.pBox`
+  margin: 0;
+  color: orange30;
+  font-size: 15px;
+  line-height: 19px;
+  font-weight: 500;
+`;

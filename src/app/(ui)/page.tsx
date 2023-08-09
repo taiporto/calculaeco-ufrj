@@ -4,9 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import MajorTermForm from "@/components/MajorTermForm";
 import Link from "next/link";
-import { FormContainer, globalStyles } from "../styles";
-import { Header } from "@/components/general/Header";
-import { MajorsProvider, useMajorsContext } from "../context/majors";
+import { FormContainer } from "../styles";
+import { useMajorsContext } from "../context/majors";
 
 export default function HomePage() {
   const [major, setMajor] = useState("");

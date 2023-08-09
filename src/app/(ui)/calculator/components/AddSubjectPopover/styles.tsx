@@ -1,5 +1,6 @@
+//@ts-nocheck
 import * as Popover from "@radix-ui/react-popover";
-import { keyframes, styled } from "../../../../../../stitches.config";
+import { keyframes, styled } from "@xstyled/styled-components";
 
 const slideUpAndFade = keyframes({
   "0%": { opacity: 0, transform: "translateY(2px)" },
@@ -21,46 +22,60 @@ const slideLeftAndFade = keyframes({
   "100%": { opacity: 1, transform: "translateX(0)" },
 });
 
-export const PopoverContent = styled(Popover.Content, {
-  borderRadius: 4,
-  padding: 20,
-  width: 260,
-  backgroundColor: "white",
-  boxShadow:
-    "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
-  animationDuration: "400ms",
-  animationTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-  willChange: "transform, opacity",
-  '&[data-state="open"]': {
-    '&[data-side="top"]': { animationName: slideDownAndFade },
-    '&[data-side="right"]': { animationName: slideLeftAndFade },
-    '&[data-side="bottom"]': { animationName: slideUpAndFade },
-    '&[data-side="left"]': { animationName: slideRightAndFade },
-  },
-  "&:focus": {
-    boxShadow:
-      "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px, 0 0 0 2px $orange80",
-  },
-});
+export const PopoverContent = styled(Popover.Content)`
+  border-radius: 4px;
+  padding: 20px;
+  width: 260px;
+  background-color: neutral0;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px hsl(206 22% 7% / 20%) 0px
+    10px 20px -15px;
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform opacity;
 
-export const PopoverArrow = styled(Popover.Arrow, {
-  fill: "white",
-});
+  &[data-state="open"] {
+    &[data-side="top"] {
+      animation-name: slideDownAndFade;
+    }
+    &[data-side="right"] {
+      animation-name: slideLeftAndFade;
+    }
+    &[data-side="bottom"] {
+      animation-name: slideUpAndFade;
+    }
+    &[data-side="left"] {
+      animation-name: slideRightAndFade;
+    }
+  }
 
-export const PopoverClose = styled(Popover.Close, {
-  all: "unset",
-  fontFamily: "inherit",
-  borderRadius: "100%",
-  height: 25,
-  width: 25,
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  color: "$neutral100",
-  position: "absolute",
-  top: 5,
-  right: 5,
+  &:focus {
+    box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+      hsl(206 22% 7% / 20%) 0px 10px 20px -15px, 0 0 0 2px orange80;
+  }
+`;
 
-  "&:hover": { backgroundColor: "$neutral5" },
-  "&:focus": { boxShadow: `0 0 0 2px $neutral80` },
-});
+export const PopoverArrow = styled(Popover.Arrow)`
+  fill: neutral0;
+`;
+
+export const PopoverClose = styled(Popover.Close)`
+  all: unset;
+  font-family: inherit;
+  border-radius: 100%;
+  height: 25;
+  width: 25;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: neutral100;
+  position: absolute;
+  top: 5;
+  right: 5;
+
+  &:hover {
+    background-color: neutral5;
+  }
+  &:focus {
+    box-shadow: 0 0 0 2px neutral80;
+  }
+`;
