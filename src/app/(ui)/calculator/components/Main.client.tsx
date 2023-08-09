@@ -9,6 +9,9 @@ import * as Popover from "@radix-ui/react-popover";
 import { AddSubjectPopover } from "./AddSubjectPopover";
 import { useSubjectsContext } from "../context/subjects";
 import Button from "@/components/general/Button";
+import { PopoverTrigger } from "../style";
+
+import { x } from "@xstyled/styled-components";
 
 export const Main = () => {
   const { originalSubjects, setSubjects } = useSubjectsContext();
@@ -24,14 +27,12 @@ export const Main = () => {
         <Suspense fallback={<Loading />}>
           <SubjectsForm />
         </Suspense>
-        <div>
-          <Popover.Trigger asChild>
-            <Button>Adicionar matéria</Button>
-          </Popover.Trigger>
+        <x.div display="flex">
+          <PopoverTrigger>Adicionar matéria</PopoverTrigger>
           {setSubjects.length >= 1 && (
             <Button onClick={resetSubjects}>Resetar lista de matérias</Button>
           )}
-        </div>
+        </x.div>
       </main>
       <AddSubjectPopover />
     </Popover.Root>

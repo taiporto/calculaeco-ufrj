@@ -1,9 +1,9 @@
-import { styled } from "@xstyled/styled-components";
+import { css, styled } from "@xstyled/styled-components";
 
-export const Button = styled.buttonBox`
+export const buttonStyle = css`
   width: 100%;
   font-size: 1rem;
-  padding: 16px;
+  padding: 14px 12px;
   border-radius: 10px;
   color: neutral0;
   background-color: neutral100;
@@ -14,4 +14,8 @@ export const Button = styled.buttonBox`
     background-color: neutral80;
     cursor: pointer;
   }
+`;
+
+export const Button = styled.buttonBox`
+  ${buttonStyle}
 `;
