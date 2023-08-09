@@ -25,12 +25,12 @@ export const Input = styled.inputBox`
   font-size: 16px;
   line-height: 1;
   color: neutral100;
-  box-shadow: ${`0 0 0 1px ${th.color("neutral20")}`};
+  box-shadow: stroke;
   background-color: neutral0;
   height: 36px;
 
   &:focus {
-    box-shadow: ${`0 0 0 2px ${th.color("orange50")}`};
+    box-shadow: "stroke.highlight";
   }
 `;
 

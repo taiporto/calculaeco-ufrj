@@ -2,7 +2,7 @@ import { createGlobalStyle, styled } from "@xstyled/styled-components";
 
 export const globalStyles = createGlobalStyle`
   * {
-    font-family: 'inter',
+    font-family: inter,
   }
 
   body {
