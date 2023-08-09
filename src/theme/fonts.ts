@@ -1,3 +1,3 @@
 export const fonts = {
-  inter: 'var(--font-inter), sans-serif',
+  interFont: 'var(--font-inter), sans-serif',
 } as const;

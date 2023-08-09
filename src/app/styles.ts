@@ -1,8 +1,8 @@
 import { createGlobalStyle, styled } from "@xstyled/styled-components";
 
-export const globalStyles = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   * {
-    font-family: inter,
+    font-family: interFont;
   }
 
   body {
@@ -13,7 +13,14 @@ export const globalStyles = createGlobalStyle`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: neutral0;
+    background: orange50;
+  }
+
+  main {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   }
 
   div#__next {
