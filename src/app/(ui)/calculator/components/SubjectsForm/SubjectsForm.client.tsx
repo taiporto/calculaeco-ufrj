@@ -1,15 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense } from "react";
 
 import { Subject } from "@/api/types";
 import { GradeMap } from "../../types";
 import { SubjectBlock } from "../SubjectBlock";
 import { useSubjectsContext } from "../../context/subjects";
 import { useGradesContext } from "../../context/grades";
+import Loading from "../../../loading";
 
 export const SubjectsForm = () => {
-  const { subjects, setSubjects } = useSubjectsContext();
+  const {
+    subjects,
+    updateSubjects: setSubjects,
+    isLoading: areSubjectsLoading,
+  } = useSubjectsContext();
   const { setGrades } = useGradesContext();
 
   const handleGradeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,9 +37,7 @@ export const SubjectsForm = () => {
 
   const handleDeleteSubject = (deletedSubjectId: Subject["id"]) => {
     handleClearGrade(deletedSubjectId);
-    setSubjects((prevSubjects) =>
-      prevSubjects.filter((subject) => subject.id !== deletedSubjectId)
-    );
+    setSubjects(subjects.filter((subject) => subject.id !== deletedSubjectId));
   };
 
   const handleClearGrade = (subjectId: Subject["id"]) => {
@@ -48,19 +51,17 @@ export const SubjectsForm = () => {
     });
   };
 
-  return (
-    <form>
-      {subjects.map((subject) => {
-        return (
-          <SubjectBlock
-            key={subject.id}
-            subject={subject}
-            onChange={handleGradeChange}
-            onDeleteSubject={handleDeleteSubject}
-            onClearGrade={handleClearGrade}
-          />
-        );
-      })}
-    </form>
-  );
+  const renderSubjectBlock = (subject: Subject) => {
+    return (
+      <SubjectBlock
+        key={subject.id}
+        subject={subject}
+        onChange={handleGradeChange}
+        onDeleteSubject={handleDeleteSubject}
+        onClearGrade={handleClearGrade}
+      />
+    );
+  };
+
+  return <form>{subjects.map(renderSubjectBlock)}</form>;
 };

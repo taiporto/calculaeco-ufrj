@@ -17,8 +17,10 @@ import { useSubjectsContext } from "@/app/(ui)/calculator/context/subjects";
 
 const AddSubjectPopover = () => {
   const majors = useMajorsContext();
-  const { subjects: calculatorSubjects, setSubjects: setCalculatorSubjects } =
-    useSubjectsContext();
+  const {
+    subjects: calculatorSubjects,
+    updateSubjects: setCalculatorSubjects,
+  } = useSubjectsContext();
 
   const [major, setMajor] = useState("");
   const [term, setTerm] = useState("");
@@ -36,11 +38,7 @@ const AddSubjectPopover = () => {
       return;
     }
 
-    setCalculatorSubjects((prevCalculatorSubjects) => {
-      if (!prevCalculatorSubjects) return [newSubject];
-
-      return [...prevCalculatorSubjects, newSubject];
-    });
+    setCalculatorSubjects([...calculatorSubjects, newSubject]);
   };
 
   const addSubject = async (): Promise<void> => {

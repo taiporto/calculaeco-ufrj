@@ -1,9 +1,9 @@
 import { fetchSubjectsByTermAndMajor } from "@/api";
-import Link from "next/link";
-import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import { GradesProvider } from "./context/grades";
 import { Main } from "./components/Main.client";
 import { SubjectsProvider } from "./context/subjects";
+import React from "react";
+import { Header } from "./components/Header";
 
 type PageProps = {
   searchParams: { [key: string]: string | undefined };
@@ -15,11 +15,7 @@ export default async function Page({ searchParams }: PageProps) {
   if (!term || !major)
     return (
       <>
-        <header>
-          <Link href="/">
-            <ArrowLeftIcon />
-          </Link>
-        </header>
+        <Header />
         <SubjectsProvider fetchedSubjects={[]}>
           <GradesProvider>
             <Main />
@@ -32,11 +28,7 @@ export default async function Page({ searchParams }: PageProps) {
 
   return (
     <>
-      <header>
-        <Link href="/">
-          <ArrowLeftIcon />
-        </Link>
-      </header>
+      <Header />
       <SubjectsProvider fetchedSubjects={fetchedSubjects}>
         <GradesProvider>
           <Main />
