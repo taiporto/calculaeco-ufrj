@@ -1,6 +1,4 @@
-import { colors } from "./colors";
-import { shadows } from "./shadows";
-import { fonts } from "./fonts";
+import { colors, fonts, shadows } from "./tokens";
 
 export const theme = {
   colors: {
