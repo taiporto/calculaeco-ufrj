@@ -26,7 +26,7 @@ const AddSubjectPopover = () => {
   const [term, setTerm] = useState("");
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [isSelectSubjectOpen, setIsSelectSubjectOpen] = useState(false);
-  const [newSubjectId, setNewSubjectId] = useState<string>("");
+  const [newSubjectId, setNewSubjectId] = useState<Subject["id"]>(0);
 
   const handleAddSubject = (newSubject: Subject) => {
     if (
@@ -60,7 +60,7 @@ const AddSubjectPopover = () => {
   };
 
   const handleNewSubjectChange = (value: string) => {
-    setNewSubjectId(value);
+    setNewSubjectId(+value);
   };
 
   const handleSubmitSubjectForm = (event: FormEvent<HTMLFormElement>) => {

@@ -1,4 +1,6 @@
-export type SelectData = {id: string, name: string}
+import { Subject } from "@/api/types";
+
+export type SelectData = {id: Subject['id'], name: string}
 
 export type Field<T> = {
   type: 'select' | 'text';

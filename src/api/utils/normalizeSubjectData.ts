@@ -5,7 +5,7 @@ export const normalizeSubjectData = (subject: OriginalSubject): Subject => {
     id: subject.id_disciplina,
     name: subject.nome_disciplina,
     code: subject.cod_disciplina ?? '',
-    weight: +subject.creditos,
+    weight: subject.creditos,
     term: subject.periodo,
     major: subject.curso,
   };

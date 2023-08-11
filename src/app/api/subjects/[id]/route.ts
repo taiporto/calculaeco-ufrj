@@ -1,8 +1,9 @@
 import { fetchSubjectById } from "@/api/fetchSubjects";
+import { Subject } from "@/api/types";
 import { type NextRequest, NextResponse } from "next/server";
 
-async function getSubjectById(id: string) {
-  const response = await fetchSubjectById(id as string);
+async function getSubjectById(id: Subject['id']) {
+  const response = await fetchSubjectById(id);
 
   if (!response?.subject || !response) return;
 
@@ -14,7 +15,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const result = await getSubjectById(params.id.toString());
+    const result = await getSubjectById(Number(params.id.toString()));
 
     if (!result) return NextResponse.json({ error: "Not found" });
 

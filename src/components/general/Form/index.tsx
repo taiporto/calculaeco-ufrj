@@ -48,8 +48,8 @@ export const Form = ({ fields, submitText, onSubmit }: FormProps) => {
                                 field.renderSelectItem?.(data) || (
                                   <SelectItem
                                     key={data.id}
-                                    id={data.id}
-                                    value={data.id}
+                                    id={data.id.toString()}
+                                    value={data.id.toString()}
                                   >
                                     {data.name}
                                   </SelectItem>

@@ -1,16 +1,16 @@
 export type OriginalSubject = {
   _id: string,
-  id_disciplina: string,
+  id_disciplina: number,
   cod_disciplina: string,
   nome_disciplina: string,
-  creditos: string,
+  creditos: number,
   periodo: string,
   curso: string,
-  valido: string,
+  valido: boolean,
 }
 
 export type Subject = {
-  id: string,
+  id: number,
   name: string,
   code: string,
   weight: number,

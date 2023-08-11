@@ -1,7 +1,7 @@
 import { Subject } from "@/api/types";
 
 export const fetchSubjectById = async (
-  subjectId: string
+  subjectId: Subject["id"]
 ): Promise<Subject | undefined> => {
   const subject = await fetch(
     `${process.env.NEXT_PUBLIC_APP_URL}/api/subjects/${subjectId}`
