@@ -18,6 +18,7 @@ type MajorTermFormProps = {
   setTerm: (value: string) => void;
   submitButtonValue: string;
   handleSubmitForm: (event: React.FormEvent<HTMLFormElement>) => void;
+  wrap?: boolean;
 };
 
 const MajorTermForm = ({
@@ -26,6 +27,7 @@ const MajorTermForm = ({
   setTerm,
   submitButtonValue,
   handleSubmitForm,
+  wrap,
 }: MajorTermFormProps) => {
   const [terms, setTerms] = useState([
     {
@@ -142,6 +144,7 @@ const MajorTermForm = ({
       fields={fields}
       submitText={submitButtonValue}
       onSubmit={handleSubmitForm}
+      wrap={wrap}
     />
   );
 };

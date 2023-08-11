@@ -9,10 +9,15 @@ export const buttonStyle = css`
   background-color: neutral100;
   border: none;
   transition: all 0.2s;
+  box-shadow: medium;
 
   &:hover {
     background-color: neutral80;
     cursor: pointer;
+  }
+
+  &:focus {
+    box-shadow: stroke-highlight-medium;
   }
 `;
 

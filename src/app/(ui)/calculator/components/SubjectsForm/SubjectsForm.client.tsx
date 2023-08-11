@@ -1,32 +1,40 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React, { useCallback } from "react";
 
 import { Subject } from "@/api/types";
 import { GradeMap } from "../../types";
 import { SubjectBlock } from "../SubjectBlock";
 import { useSubjectsContext } from "../../context/subjects";
 import { useGradesContext } from "../../context/grades";
-import Loading from "../../../loading";
+
+import { x } from "@xstyled/styled-components";
+import { FormContainer } from "@/components/general/Form/styles";
 
 export const SubjectsForm = () => {
-  const {
-    subjects,
-    updateSubjects: setSubjects,
-    isLoading: areSubjectsLoading,
-  } = useSubjectsContext();
+  const { subjects, updateSubjects: setSubjects } = useSubjectsContext();
   const { setGrades } = useGradesContext();
+
+  const calculateWidth = () => {
+    if (!subjects) return "100%";
+
+    const { length } = subjects;
+
+    if (!length) return "100%";
+
+    if (length === 1) return "70%";
+
+    return "55%";
+  };
 
   const handleGradeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id } = event.target;
 
-    const weight = subjects.find((subject) => subject.id === id)?.weight;
-
-    console.log({ value, id, weight });
+    const weight = subjects.find((subject) => subject.id === +id)?.weight;
 
     setGrades((prevGrades) => {
       return new Map(
-        prevGrades.set(id, {
+        prevGrades.set(+id, {
           value: +value,
           weight: weight ?? 0,
         })
@@ -63,5 +71,20 @@ export const SubjectsForm = () => {
     );
   };
 
-  return <form>{subjects.map(renderSubjectBlock)}</form>;
+  return (
+    <x.div p={10}>
+      <FormContainer
+        row
+        m="-2 auto"
+        justifyContent="center"
+        w={calculateWidth()}
+      >
+        {subjects && subjects.length ? (
+          subjects.map(renderSubjectBlock)
+        ) : (
+          <p>Adicione algumas matérias!</p>
+        )}
+      </FormContainer>
+    </x.div>
+  );
 };

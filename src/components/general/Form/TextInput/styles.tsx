@@ -1,6 +1,30 @@
-import { th, styled } from "@xstyled/styled-components";
+import { styled, css } from "@xstyled/styled-components";
 
-export const Fieldset = styled.fieldsetBox`
+const inputPadding = "0 10px";
+const inputRadius = "8px";
+
+const inputStyles = css`
+  all: unset;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  border-radius: ${inputRadius};
+  padding: ${inputPadding};
+  font-size: 16px;
+  line-height: 1;
+  color: neutral100;
+  box-shadow: stroke;
+  background-color: neutral0;
+  height: 36px;
+
+  &:focus-within {
+    box-shadow: stroke-highlight-light;
+  }
+`;
+
+export const Container = styled.divBox`
   all: unset;
   display: flex;
   gap: 20px;
@@ -14,23 +38,22 @@ export const Label = styled.labelBox`
 `;
 
 export const Input = styled.inputBox`
-  all: unset;
-  width: 100%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  border-radius: 8px;
-  padding: 0 10px;
-  font-size: 16px;
-  line-height: 1;
-  color: neutral100;
-  box-shadow: stroke;
-  background-color: neutral0;
-  height: 36px;
+  ${inputStyles}
+`;
 
-  &:focus {
-    box-shadow: "stroke.highlight";
+export const InputDiv = styled.divBox`
+  ${inputStyles}
+  padding-left: 0;
+
+  input {
+    height: 100%;
+    width: 100%;
+    padding: ${inputPadding};
+    border-radius: ${inputRadius};
+
+    &:focus {
+      outline: none;
+    }
   }
 `;
 

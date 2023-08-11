@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import MajorTermForm from "@/components/MajorTermForm";
 import Link from "next/link";
-import { FormContainer } from "../styles";
 import { useMajorsContext } from "../context/majors";
+
+import { x } from "@xstyled/styled-components";
 
 export default function HomePage() {
   const [major, setMajor] = useState("");
@@ -31,19 +32,25 @@ export default function HomePage() {
   };
 
   return (
-    <>
-      <FormContainer>
-        <MajorTermForm
-          majorsData={majors}
-          setMajor={setMajor}
-          setTerm={setTerm}
-          handleSubmitForm={handleSubmitForm}
-          submitButtonValue={"Ir para a calculadora"}
-        />
-      </FormContainer>
+    <x.div
+      w="40%"
+      m="24px"
+      textAlign="center"
+      display="flex"
+      flexDirection="column"
+      gap="32px"
+    >
+      <MajorTermForm
+        majorsData={majors}
+        setMajor={setMajor}
+        setTerm={setTerm}
+        handleSubmitForm={handleSubmitForm}
+        submitButtonValue={"Ir para a calculadora"}
+        wrap
+      />
       <Link href="/calculator">
         Prefiro escolher minhas próprias matérias 😅
       </Link>
-    </>
+    </x.div>
   );
 }

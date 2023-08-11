@@ -37,7 +37,7 @@ export const SubjectsProvider = ({
   useEffect(() => {
     const sessionSubjects = sessionStorage.getItem("subjects");
 
-    if (!sessionSubjects) return;
+    if (!sessionSubjects || sessionSubjects === "undefined") return;
 
     setSubjects(JSON.parse(sessionSubjects));
   }, []);

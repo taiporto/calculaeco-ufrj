@@ -8,7 +8,7 @@ import * as Popover from "@radix-ui/react-popover";
 import { AddSubjectPopover } from "./AddSubjectPopover";
 import { useSubjectsContext } from "../context/subjects";
 import Button from "@/components/general/Button";
-import { PopoverTrigger } from "../style";
+import { PopoverTrigger } from "../styles";
 
 import { x } from "@xstyled/styled-components";
 

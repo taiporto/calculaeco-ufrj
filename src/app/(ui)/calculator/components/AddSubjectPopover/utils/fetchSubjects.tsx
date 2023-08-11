@@ -22,6 +22,7 @@ export const fetchSubjectsByTermAndMajor = async (
   term: string,
   major: string
 ): Promise<Subject[] | undefined> => {
+  console.log({ term, major });
   const fetchedSubjects = await fetch(
     `${process.env.NEXT_PUBLIC_APP_URL}/api/subjects?term=${term}&major=${major}`
   )
