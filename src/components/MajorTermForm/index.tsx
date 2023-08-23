@@ -1,11 +1,12 @@
 "use client";
 
-import { Major } from "@/api/types";
 import React, { useCallback, useMemo, useState } from "react";
 
+import { Major } from "@/api/types";
+
 import { Form } from "../general/Form";
-import { Field } from "../general/Form/types";
 import { SelectItem } from "../general/Form/Select/SelectItem";
+import { Field } from "../general/Form/types";
 
 type TermField = {
   term: number;

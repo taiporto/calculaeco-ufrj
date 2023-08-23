@@ -1,9 +1,10 @@
 "use client";
 
-import { Header } from "@/components/general/Header";
-import { theme } from "../../xstyled.config";
+import { Preflight,ThemeProvider, x } from "@xstyled/styled-components";
 
-import { x, ThemeProvider, Preflight } from "@xstyled/styled-components";
+import { Header } from "@/components/general/Header";
+
+import { theme } from "../../xstyled.config";
 import { GlobalStyle } from "../styles";
 
 export default function ClientLayout({

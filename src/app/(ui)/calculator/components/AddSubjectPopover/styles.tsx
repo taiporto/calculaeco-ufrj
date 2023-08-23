@@ -1,12 +1,13 @@
 //@ts-nocheck
+import * as Popover from "@radix-ui/react-popover";
+import { keyframes, styled } from "@xstyled/styled-components";
+
 import {
   slideDownAndFade,
   slideLeftAndFade,
   slideRightAndFade,
   slideUpAndFade,
 } from "@/theme/tokens/animations";
-import * as Popover from "@radix-ui/react-popover";
-import { keyframes, styled } from "@xstyled/styled-components";
 
 export const PopoverContent = styled(Popover.Content)`
   border-radius: 4px;

@@ -1,7 +1,8 @@
 "use client";
 
+import { createContext, ReactNode, useContext } from "react";
+
 import { Major } from "@/api/types";
-import { ReactNode, createContext, useContext } from "react";
 
 const MajorsContext = createContext([] as Major[]);
 

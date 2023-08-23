@@ -1,5 +1,6 @@
-import { fetchAllSubjects, fetchSubjectsByTermAndMajor } from "@/api";
 import { type NextRequest, NextResponse } from "next/server";
+
+import { fetchAllSubjects, fetchSubjectsByTermAndMajor } from "@/api";
 
 async function getAllSubjects(searchParams: URL['searchParams']) {
   let subjects;

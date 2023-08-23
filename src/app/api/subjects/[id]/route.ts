@@ -1,6 +1,7 @@
+import { type NextRequest, NextResponse } from "next/server";
+
 import { fetchSubjectById } from "@/api/fetchSubjects";
 import { Subject } from "@/api/types";
-import { type NextRequest, NextResponse } from "next/server";
 
 async function getSubjectById(id: Subject['id']) {
   const response = await fetchSubjectById(id);

@@ -1,8 +1,10 @@
 import { Metadata } from "next";
-import { MajorsProvider } from "./context/majors";
+import { Inter } from "next/font/google";
+
 import { fetchAllMajors } from "@/api";
 import StyledComponentsRegistry from "@/lib/registry";
-import { Inter } from "next/font/google";
+
+import { MajorsProvider } from "./context/majors";
 
 export const metadata: Metadata = {
   title: "CalculaECO",

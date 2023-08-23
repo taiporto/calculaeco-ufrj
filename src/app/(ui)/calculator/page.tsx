@@ -1,9 +1,11 @@
-import { fetchSubjectsByTermAndMajor } from "@/api";
-import { GradesProvider } from "./context/grades";
-import { Main } from "./components/Main.client";
-import { SubjectsProvider } from "./context/subjects";
 import React from "react";
+
+import { fetchSubjectsByTermAndMajor } from "@/api";
+
 import { Header } from "./components/Header";
+import { Main } from "./components/Main.client";
+import { GradesProvider } from "./context/grades";
+import { SubjectsProvider } from "./context/subjects";
 
 type PageProps = {
   searchParams: { [key: string]: string | undefined };

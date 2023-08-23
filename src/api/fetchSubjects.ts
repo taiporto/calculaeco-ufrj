@@ -1,6 +1,7 @@
-import { Subject } from './types';
-import { normalizeSubjectData } from './utils/normalizeSubjectData';
 import { client } from "../lib/mongodb";
+
+import { normalizeSubjectData } from './utils/normalizeSubjectData';
+import { Subject } from './types';
 
 type FetchSubjectByIdReturn = {
     subject: Subject | null;
@@ -56,4 +57,4 @@ const fetchSubjectById = async (id: Subject['id']): Promise<FetchSubjectByIdRetu
     }
 };
 
-export { fetchAllSubjects, fetchSubjectsByTermAndMajor, fetchSubjectById }
+export { fetchAllSubjects, fetchSubjectById,fetchSubjectsByTermAndMajor }

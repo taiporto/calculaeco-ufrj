@@ -1,7 +1,8 @@
 //@ts-nocheck
-import { buttonStyle } from "@/components/general/Button/styles";
 import * as Popover from "@radix-ui/react-popover";
 import { styled } from "@xstyled/styled-components";
+
+import { buttonStyle } from "@/components/general/Button/styles";
 
 export const Form = styled.formBox`
   display: flex;

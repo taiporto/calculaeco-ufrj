@@ -1,4 +1,5 @@
 import { client } from "../lib/mongodb"
+
 import { normalizeMajorData } from './utils';
 
 

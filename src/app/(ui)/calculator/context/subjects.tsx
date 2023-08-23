@@ -1,14 +1,16 @@
 "use client";
 
 import {
-  ReactNode,
   createContext,
+  ReactNode,
   useContext,
   useEffect,
   useState,
 } from "react";
-import { GradeMap } from "../types";
+
 import { Subject } from "@/api/types";
+
+import { GradeMap } from "../types";
 
 type SubjectsContextProps = {
   originalSubjects: Subject[];

@@ -1,19 +1,20 @@
 "use client";
 
-import * as Popover from "@radix-ui/react-popover";
-import { Subject } from "@/api/types";
-import MajorTermForm from "@/components/MajorTermForm";
 import React, { FormEvent, useState } from "react";
-import { useMajorsContext } from "@/app/context/majors";
 import { Cross2Icon } from "@radix-ui/react-icons";
+import * as Popover from "@radix-ui/react-popover";
+
+import { Subject } from "@/api/types";
+import { useSubjectsContext } from "@/app/(ui)/calculator/context/subjects";
+import { useMajorsContext } from "@/app/context/majors";
+import MajorTermForm from "@/components/MajorTermForm";
+
 import {
   fetchSubjectById,
   fetchSubjectsByTermAndMajor,
 } from "./utils/fetchSubjects";
-import { SubjectSelectionForm } from "./SubjectSelectionForm";
-
 import * as S from "./styles";
-import { useSubjectsContext } from "@/app/(ui)/calculator/context/subjects";
+import { SubjectSelectionForm } from "./SubjectSelectionForm";
 
 const AddSubjectPopover = () => {
   const majors = useMajorsContext();

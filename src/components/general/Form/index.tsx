@@ -1,10 +1,10 @@
 import React, { FormEventHandler, ReactNode } from "react";
-import { FormField, FormRoot } from "./styles";
 import * as RadixForm from "@radix-ui/react-form";
-import * as RadixSelect from "@radix-ui/react-select";
 import { ChevronDownIcon, ChevronUpIcon } from "@radix-ui/react-icons";
+import * as RadixSelect from "@radix-ui/react-select";
+
 import Button from "../Button";
-import { Field, SelectData } from "./types";
+
 import { SelectItem } from "./Select/SelectItem";
 import {
   SelectContent,
@@ -12,7 +12,9 @@ import {
   SelectTrigger,
   SelectViewport,
 } from "./Select/styles";
+import { FormField, FormRoot } from "./styles";
 import { FormContainer } from "./styles";
+import { Field, SelectData } from "./types";
 
 type FormProps = {
   fields: Field<any>[];

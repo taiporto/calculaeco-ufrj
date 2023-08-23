@@ -1,5 +1,5 @@
 import { colors } from "./colors";
-import { shadows } from "./shadows";
 import { fonts } from "./fonts";
+import { shadows } from "./shadows";
 
-export { colors, shadows, fonts };
+export { colors, fonts,shadows };

@@ -2,8 +2,9 @@
 
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
-import { useSubjectsContext } from "../../context/subjects";
 import { useRouter } from "next/navigation";
+
+import { useSubjectsContext } from "../../context/subjects";
 
 export const Header = () => {
   const router = useRouter();

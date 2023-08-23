@@ -1,5 +1,6 @@
-import { fetchAllMajors } from "@/api";
 import { NextApiRequest, NextApiResponse } from "next";
+
+import { fetchAllMajors } from "@/api";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req: NextApiRequest, res: NextApiResponse) => {

@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useCallback } from "react";
+import React from "react";
+import { x } from "@xstyled/styled-components";
 
 import { Subject } from "@/api/types";
+import { FormContainer } from "@/components/general/Form/styles";
+
+import { useGradesContext } from "../../context/grades";
+import { useSubjectsContext } from "../../context/subjects";
 import { GradeMap } from "../../types";
 import { SubjectBlock } from "../SubjectBlock";
-import { useSubjectsContext } from "../../context/subjects";
-import { useGradesContext } from "../../context/grades";
-
-import { x } from "@xstyled/styled-components";
-import { FormContainer } from "@/components/general/Form/styles";
 
 export const SubjectsForm = () => {
   const { subjects, updateSubjects: setSubjects } = useSubjectsContext();
@@ -75,7 +75,7 @@ export const SubjectsForm = () => {
     <x.div p={10}>
       <FormContainer
         row
-        m="-2 auto"
+        m="-4 auto"
         justifyContent="center"
         w={calculateWidth()}
       >

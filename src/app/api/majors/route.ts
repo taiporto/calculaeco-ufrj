@@ -1,5 +1,6 @@
-import { fetchAllMajors } from "@/api";
 import { NextResponse } from "next/server";
+
+import { fetchAllMajors } from "@/api";
 
 export async function GET() {
   try {

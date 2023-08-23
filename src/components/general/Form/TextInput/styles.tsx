@@ -1,4 +1,4 @@
-import { styled, css } from "@xstyled/styled-components";
+import { css,styled } from "@xstyled/styled-components";
 
 const inputPadding = "0 10px";
 const inputRadius = "8px";

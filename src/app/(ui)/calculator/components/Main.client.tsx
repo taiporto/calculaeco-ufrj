@@ -1,16 +1,17 @@
 "use client";
 
 import React, { Suspense, useMemo } from "react";
-import { Information } from "./Information.client";
-import { SubjectsForm } from "./SubjectsForm/SubjectsForm.client";
-
 import * as Popover from "@radix-ui/react-popover";
-import { AddSubjectPopover } from "./AddSubjectPopover";
-import { useSubjectsContext } from "../context/subjects";
+import { x } from "@xstyled/styled-components";
+
 import Button from "@/components/general/Button";
+
+import { useSubjectsContext } from "../context/subjects";
 import { PopoverTrigger } from "../styles";
 
-import { x } from "@xstyled/styled-components";
+import { SubjectsForm } from "./SubjectsForm/SubjectsForm.client";
+import { AddSubjectPopover } from "./AddSubjectPopover";
+import { Information } from "./Information.client";
 
 export const Main = () => {
   const {

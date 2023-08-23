@@ -1,4 +1,4 @@
-import { Subject, OriginalSubject } from '../types';
+import { OriginalSubject,Subject } from '../types';
 
 export const normalizeSubjectData = (subject: OriginalSubject): Subject => {
   return {

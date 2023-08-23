@@ -1,16 +1,15 @@
-import { Subject } from "@/api/types";
-import React, { useRef } from "react";
+import React, { RefObject, useRef } from "react";
+import { ReloadIcon, TrashIcon } from "@radix-ui/react-icons";
+import * as Tooltip from "@radix-ui/react-tooltip";
+import { x } from "@xstyled/styled-components";
 import { useDebouncedCallback } from "use-debounce";
 
-import { ReloadIcon, TrashIcon } from "@radix-ui/react-icons";
+import { Subject } from "@/api/types";
 import { TextInput } from "@/components/general/Form/TextInput";
 
-import * as Tooltip from "@radix-ui/react-tooltip";
-
-import { x } from "@xstyled/styled-components";
+import { useSubjectsContext } from "../../context/subjects";
 
 import * as S from "./styles";
-import { useSubjectsContext } from "../../context/subjects";
 
 type SubjectBlockProps = {
   subject: Subject;
@@ -18,6 +17,19 @@ type SubjectBlockProps = {
   onDeleteSubject: (deletedSubjectId: Subject["id"]) => void;
   onClearGrade: (subjectId: Subject["id"]) => void;
 };
+
+function isEllipsisActive(ref: RefObject<HTMLLabelElement>) {
+  if (!ref.current) return true;
+
+  const element = ref.current;
+
+  if (element.clientWidth < element.scrollWidth) {
+    var style = window.getComputedStyle(element);
+    return style.textOverflow === "ellipsis";
+  }
+
+  return false;
+}
 
 const SubjectBlock = ({
   subject,
@@ -29,6 +41,7 @@ const SubjectBlock = ({
 
   const debounced = useDebouncedCallback(onChange, 1000);
   const inputRef = useRef<HTMLInputElement>(null);
+  const labelRef = useRef<HTMLLabelElement>(null);
 
   const subjectId = subject.id.toString() + subject.code;
 
@@ -42,12 +55,13 @@ const SubjectBlock = ({
   };
 
   return (
-    <x.div textAlign="left" col={subjects.length > 1 ? 1 / 2 : 1} p={2}>
-      <Tooltip.Provider>
+    <x.div textAlign="left" col={subjects.length > 1 ? 1 / 2 : 1} p={4}>
+      <Tooltip.Provider delayDuration={200}>
         <Tooltip.Root>
           <Tooltip.Trigger asChild>
             <x.label
-              fontSize=".82rem"
+              ref={labelRef}
+              fontSize=".9rem"
               display="inline-block"
               maxW="85%"
               overflow="hidden"
@@ -60,9 +74,12 @@ const SubjectBlock = ({
             </x.label>
           </Tooltip.Trigger>
           <Tooltip.Portal>
-            <S.TooltipContent className="TooltipContent" sideOffset={5}>
+            <S.TooltipContent
+              sideOffset={-1}
+              $shouldActivate={isEllipsisActive(labelRef)}
+            >
               {subject.name}
-              <S.TooltipArrow className="TooltipArrow" />
+              <S.TooltipArrow />
             </S.TooltipContent>
           </Tooltip.Portal>
         </Tooltip.Root>

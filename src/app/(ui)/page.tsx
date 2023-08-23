@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import MajorTermForm from "@/components/MajorTermForm";
-import Link from "next/link";
-import { useMajorsContext } from "../context/majors";
-
 import { x } from "@xstyled/styled-components";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import MajorTermForm from "@/components/MajorTermForm";
+
+import { useMajorsContext } from "../context/majors";
 
 export default function HomePage() {
   const [major, setMajor] = useState("");
